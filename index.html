@@ -243,12 +243,10 @@
 
             ctx.clearRect(0, 0, largura, altura);
 
-            // tam. dos quadrados da grade
             let passo = 20;
 
             ctx.strokeStyle = "#d0d0d0";
 
-            // grade
             for(let x=0; x<largura; x+=passo){
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
@@ -262,23 +260,20 @@
                 ctx.stroke();
             }
 
-            // eixo X e Y
             ctx.strokeStyle = "black";
             ctx.lineWidth = 2;
 
-            // eixo X
             ctx.beginPath();
             ctx.moveTo(0, altura/2);
             ctx.lineTo(largura, altura/2);
             ctx.stroke();
 
-            // eixo Y
             ctx.beginPath();
             ctx.moveTo(largura/2, 0);
             ctx.lineTo(largura/2, altura);
             ctx.stroke();
 
-            // desenhar função
+            
             ctx.strokeStyle = "red";
             ctx.lineWidth = 2;
 
@@ -298,7 +293,7 @@
             ctx.stroke();
         }
     window.onload = function(){
-    desenharGrafico(0, 0, 0); // mostra o quadriculado ao iniciar
+    desenharGrafico(0, 0, 0); 
 };
     </script>
 
@@ -354,10 +349,10 @@
         </tr>
     </table>
    <button onclick="calcular()" class="botao">Calcular Y</button>
-    </div> <!-- fecha a coluna da tabela -->
+    </div>
 
     <canvas id="grafico" width="600" height="400"></canvas>
-</div> <!-- fecha o container -->
+</div>
     
 </body>
 </html>
