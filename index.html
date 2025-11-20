@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Função Quadrada</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            background-color: #294161bb;
+        }
+        .explicacao{
+            color: #000000;
+            font-size: 150%;
+            text-align: center;
+            margin-top: 1%;
+        }
+
+        .letras{
+        text-align: center;
+       }
+       .input{
+        text-align: center;
+        margin: 2%;
+        border: 200%;
+        width: 50px;
+        height: 50px;
+        font-size: 140%;
+        color: black;
+        background-color: #9ec7e7b9;
+       }
+       .input:valid{
+        background-color: #9ec7e7b9;
+       }
+       input::placeholder{
+        color: black;
+        text-align: center;
+       }
+       input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+       }
+       .tabela{
+        margin-left: 30%;
+        margin-right:5% ;
+       }
+
+       .xy,.xy_input{
+        width: 50px;
+        height: 50px;
+        margin-left: 20%      ;
+        margin:0;
+        background-color: #62738b;
+        text-align: center;
+        font-size: 130%;
+       }
+       .xy_input{
+
+        border:none;
+       }
+    
+       table,th,td{
+        border-style: solid;
+        border-color: black;
+       }
+
+       .botao{
+        background-color: #9ec7e7b9;
+        margin: 3%;
+        border: solid black;
+        width: 100%;
+        height: 50px;
+        font-size: 140%;
+       }
+
+       .tabela_explica{
+        color: #000000;
+        font-size: 150%;
+        /* margin-left: 1%; */
+        
+       }
+
+       #grafico {
+        background-color: white;
+        display:flex ;
+        margin: 5px;
+        border: 2px solid black;
+        text-align: center;
+       }
+
+       .container {
+        display: flex;
+        align-items: flex-start;
+        gap: 7.40%;
+        margin-left: 10%;
+       }   
+
+    @media (max-width: 900px) {
+
+        .container {
+            flex-direction: column;   
+            align-items: center;
+            margin-left: 0;
+        }
+
+        .tabela {
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .xy, .xy_input {
+            width: 140px;
+            height: 35px;
+            font-size: 110%;
+        }
+
+        .input {
+            width: 45px;
+            height: 45px;
+            font-size: 130%;
+        }
+
+        #grafico {
+            width: 90% !important;   
+            height: auto;
+        }
+
+        .botao {
+            width: 93%;
+            font-size: 130%;
+        }
+    }
+
+    @media (max-width: 480px){
+
+        .explicacao{
+            margin-top: 3%;
+        }
+        .input {
+            width: 40px;
+            height: 40px;
+            font-size: 120%;
+        }
+
+        .xy, .xy_input {
+            width: 140px;
+            height: 30px;
+            font-size: 100%;
+        }
+
+        h3 {
+            font-size: 120%;
+            text-align: center;
+        }
+
+        #grafico {
+            width: 100% !important;
+        }
+
+        .botao {
+            width: 95%;
+            height: 45px;
+            font-size: 120%;
+        }
+    }
+
+    </style>
+
+    <script>
+        function calcular(){
+            let a = parseFloat(document.getElementById("a").value);
+            let b = parseFloat(document.getElementById("b").value);
+            let c = parseFloat(document.getElementById("c").value);
+            let x1 = parseFloat(document.getElementById("x1").value);
+            let x2 = parseFloat(document.getElementById("x2").value);
+            let x3 = parseFloat(document.getElementById("x3").value);
+            let x4 = parseFloat(document.getElementById("x4").value);
+            let x5 = parseFloat(document.getElementById("x5").value);
+            let x6 = parseFloat(document.getElementById("x6").value);
+            if(!a && !b && !c){
+                alert("Por favor digite valores validos no a, b ou c")
+            } 
+            else{           
+                if(!a){
+                    a=0
+                }
+                else{
+                    if(!b){
+                    b=0
+                }
+                    else{
+                        if(!c){
+                        c=0
+                        }
+                    }
+                }             
+            }
+            var y1 = a*(x1*x1)+b*x1+c;
+            var y2 = a*(x2*x2)+b*x2+c;
+            var y3 = a*(x3*x3)+b*x3+c;
+            var y4 = a*(x4*x4)+b*x4+c;
+            var y5 = a*(x5*x5)+b*x5+c;
+            var y6 = a*(x6*x6)+b*x6+c;
+            if(!y1){
+                y1=" " 
+            }             
+            if(!y2){
+            y2=" " 
+            }                 
+            if(!y3){
+            y3=" " 
+            }                   
+            if(!y4){
+            y4=" " 
+            }         
+            if(!y5){
+            y5=" " 
+            }               
+            if(!y6){
+            y6=" " 
+            } 
+                               
+            document.getElementById("y1").innerHTML = y1;
+            document.getElementById("y2").innerHTML = y2;
+            document.getElementById("y3").innerHTML = y3;
+            document.getElementById("y4").innerHTML = y4;
+            document.getElementById("y5").innerHTML = y5;
+            document.getElementById("y6").innerHTML = y6;
+
+             desenharGrafico(a, b, c);
+        }
+           
+             function desenharGrafico(a, b, c){
+            const canvas = document.getElementById("grafico");
+            const ctx = canvas.getContext("2d");
+
+            const largura = canvas.width;
+            const altura = canvas.height;
+
+            ctx.clearRect(0, 0, largura, altura);
+
+            // tam. dos quadrados da grade
+            let passo = 20;
+
+            ctx.strokeStyle = "#d0d0d0";
+
+            // grade
+            for(let x=0; x<largura; x+=passo){
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, altura);
+                ctx.stroke();
+            }
+            for(let y=0; y<altura; y+=passo){
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(largura, y);
+                ctx.stroke();
+            }
+
+            // eixo X e Y
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+
+            // eixo X
+            ctx.beginPath();
+            ctx.moveTo(0, altura/2);
+            ctx.lineTo(largura, altura/2);
+            ctx.stroke();
+
+            // eixo Y
+            ctx.beginPath();
+            ctx.moveTo(largura/2, 0);
+            ctx.lineTo(largura/2, altura);
+            ctx.stroke();
+
+            // desenhar função
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            for(let xCanvas = 0; xCanvas < largura; xCanvas++){
+                let x = (xCanvas - largura/2) / 20; 
+                let y = a*x*x + b*x + c;
+
+                let yCanvas = altura/2 - y*20;
+
+                if(xCanvas === 0){
+                    ctx.moveTo(xCanvas, yCanvas);
+                } else {
+                    ctx.lineTo(xCanvas, yCanvas);
+                }
+            }
+            ctx.stroke();
+        }
+    window.onload = function(){
+    desenharGrafico(0, 0, 0); // mostra o quadriculado ao iniciar
+};
+    </script>
+
+</head>
+<body>
+    <p class="explicacao">Digite o a, b e c da função f(x)=ax²+bx+c</p>
+    <br/>
+    <p class="letras" >
+        <input type="number" id="a" class="input" placeholder="a"> 
+        <input type="number" id="b" class="input" placeholder="b">
+        <input type="number" id="c" class="input" placeholder="c">
+    </p>
+   
+
+    <div class="container">
+    <div>
+        <h3 class="tabela_explica">Digite até 6 numeros na coluna x</h3>
+
+        <table class="tabela">
+        <tr>
+            <th class="xy">x</th>
+            <th class="xy">y</th>
+        </tr>
+
+        <tr>  
+            <td><input type="number" id="x1" class="xy_input"></td>
+            <td id="y1" class="xy"></td>
+        </tr>
+
+        <tr>
+            <td><input type="number" id="x2" class="xy_input"></td>
+            <td id="y2" class="xy"></td>
+        </tr>
+
+        <tr>
+            <td><input type="number" id="x3" class="xy_input"></td>
+            <td id="y3" class="xy"></td>
+        </tr>
+
+        <tr>
+            <td><input type="number" id="x4" class="xy_input"></td>
+            <td id="y4" class="xy"></td>
+        </tr>
+
+        <tr>
+            <td><input type="number" id="x5" class="xy_input"></td>
+            <td id="y5"class="xy"></td>
+        </tr>
+
+        <tr>
+            <td><input type="number" id="x6" class="xy_input"></td>
+            <td id="y6" class="xy"></td>
+        </tr>
+    </table>
+   <button onclick="calcular()" class="botao">Calcular Y</button>
+    </div> <!-- fecha a coluna da tabela -->
+
+    <canvas id="grafico" width="600" height="400"></canvas>
+</div> <!-- fecha o container -->
+    
+</body>
+</html>
